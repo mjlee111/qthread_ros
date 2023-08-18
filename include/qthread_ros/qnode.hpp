@@ -24,6 +24,7 @@
 #include <string>
 #include <QThread>
 #include <QStringListModel>
+#include "std_msgs/String.h"
 
 /*****************************************************************************
 ** Namespaces
@@ -41,6 +42,30 @@ namespace qthread_ros
 
 	public:
 		node1(int argc, char **argv) : n_argc(argc), n_argv(argv) {}
+		void node_1_function();
+
+		ros::Subscriber sub;
+		void subcallback(const std_msgs::String::ConstPtr msg);
+
+	Q_SIGNALS:
+
+	private:
+		int n_argc;
+		char **n_argv;
+
+	protected:
+		void run();
+	};
+
+	class node2 : public QThread
+	{
+		Q_OBJECT
+
+	public:
+		node2(int argc, char **argv) : n_argc(argc), n_argv(argv) {}
+		void node_2_function();
+
+		ros::Publisher pub;
 
 	Q_SIGNALS:
 
@@ -61,10 +86,12 @@ namespace qthread_ros
 		bool init();
 		void run();
 
-		node1 nodeth;
+		node1 node1_th;
+		node2 node2_th;
 
 	Q_SIGNALS:
-		void rosShutdown();
+		void
+		rosShutdown();
 
 	private:
 		int init_argc;
