@@ -35,6 +35,22 @@ namespace qthread_ros
 	/*****************************************************************************
 	** Class
 	*****************************************************************************/
+	class node1 : public QThread
+	{
+		Q_OBJECT
+
+	public:
+		node1(int argc, char **argv) : n_argc(argc), n_argv(argv) {}
+
+	Q_SIGNALS:
+
+	private:
+		int n_argc;
+		char **n_argv;
+
+	protected:
+		void run();
+	};
 
 	class QNode : public QThread
 	{
@@ -44,6 +60,8 @@ namespace qthread_ros
 		virtual ~QNode();
 		bool init();
 		void run();
+
+		node1 nodeth;
 
 	Q_SIGNALS:
 		void rosShutdown();

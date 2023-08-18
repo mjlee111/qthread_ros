@@ -1,7 +1,7 @@
 /**
  * @file /include/qthread_ros/main_window.hpp
  *
- * @brief Qt based gui for qthread_ros.
+ * @brief Qt based gui for qthread_ros.s
  **/
 #ifndef qthread_ros_MAIN_WINDOW_H
 #define qthread_ros_MAIN_WINDOW_H
@@ -13,6 +13,7 @@
 #include <QMainWindow>
 #include "ui_main_window.h"
 #include "qnode.hpp"
+#include <QThread>
 
 /*****************************************************************************
 ** Namespace

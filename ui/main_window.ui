@@ -20,7 +20,24 @@
   <property name="locale">
    <locale language="English" country="Australia"/>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="test">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>270</y>
+      <width>281</width>
+      <height>181</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Panel</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+  </widget>
   <action name="action_Quit">
    <property name="text">
     <string>&amp;Quit</string>

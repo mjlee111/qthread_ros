@@ -29,45 +29,45 @@ namespace qthread_ros
     *****************************************************************************/
 
     QNode::QNode(int argc, char **argv) : init_argc(argc),
-                                          init_argv(argv)
+                                          init_argv(argv), nodeth(init_argc, init_argv)
     {
     }
 
     QNode::~QNode()
     {
-        if (ros::isStarted())
-        {
-            ros::shutdown(); // explicitly needed since we use ros::start();
-            ros::waitForShutdown();
-        }
         wait();
     }
 
     bool QNode::init()
     {
-        ros::init(init_argc, init_argv, "qthread_ros");
-        if (!ros::master::check())
-        {
-            return false;
-        }
-        ros::start(); // explicitly needed since our nodehandle is going out of scope.
-        ros::NodeHandle n;
-        // Add your ros communications here.
         start();
         return true;
     }
 
     void QNode::run()
     {
-        ros::Rate loop_rate(33);
+        nodeth.start();
+        nodeth.wait();
+        Q_EMIT rosShutdown(); // used to signal the gui for a shutdown (useful to roslaunch)
+    }
+
+    void node1::run()
+    {
+        ros::init(n_argc, n_argv, "node_1");
+        if (!ros::master::check())
+        {
+            return;
+        }
+        ros::start(); // explicitly needed since our nodehandle is going out of scope.
+        ros::NodeHandle n;
+        ros::Rate loop_rate(100);
         while (ros::ok())
         {
-
+            ROS_INFO("NODE1 RUNNING!");
             ros::spinOnce();
             loop_rate.sleep();
         }
         std::cout << "Ros shutdown, proceeding to close the gui." << std::endl;
-        Q_EMIT rosShutdown(); // used to signal the gui for a shutdown (useful to roslaunch)
     }
 
 } // namespace qthread_ros
