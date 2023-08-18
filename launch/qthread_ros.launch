@@ -1,0 +1,4 @@
+<launch>
+    <node name="qthread_ros" pkg="qthread_ros" type="qthread_ros" output="screen" />
+</launch>
+  
