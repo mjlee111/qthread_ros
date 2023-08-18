@@ -30,7 +30,7 @@ namespace qthread_ros
 
     QNode::QNode(int argc, char **argv) : init_argc(argc),
                                           init_argv(argv),
-                                          node1_th(init_argc, init_argv),
+                                          node1_th(argc, argv),
                                           node2_th(argc, argv)
     {
     }
@@ -63,7 +63,7 @@ namespace qthread_ros
 
     void node1::run()
     {
-        ros::init(n_argc, n_argv, "node_1");
+        ros::init(init_argc, init_argv, "node_1");
         if (!ros::master::check())
         {
             return;
@@ -92,7 +92,7 @@ namespace qthread_ros
 
     void node2::run()
     {
-        ros::init(n_argc, n_argv, "node_2");
+        ros::init(init_argc, init_argv, "node_2");
         if (!ros::master::check())
         {
             return;

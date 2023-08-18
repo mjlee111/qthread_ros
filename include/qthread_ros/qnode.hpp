@@ -41,7 +41,7 @@ namespace qthread_ros
 		Q_OBJECT
 
 	public:
-		node1(int argc, char **argv) : n_argc(argc), n_argv(argv) {}
+		node1(int argc, char **argv) : init_argc(argc), init_argv(argv) {}
 		void node_1_function();
 
 		ros::Subscriber sub;
@@ -50,8 +50,8 @@ namespace qthread_ros
 	Q_SIGNALS:
 
 	private:
-		int n_argc;
-		char **n_argv;
+		int init_argc;
+		char **init_argv;
 
 	protected:
 		void run();
@@ -62,7 +62,7 @@ namespace qthread_ros
 		Q_OBJECT
 
 	public:
-		node2(int argc, char **argv) : n_argc(argc), n_argv(argv) {}
+		node2(int argc, char **argv) : init_argc(argc), init_argv(argv) {}
 		void node_2_function();
 
 		ros::Publisher pub;
@@ -70,8 +70,8 @@ namespace qthread_ros
 	Q_SIGNALS:
 
 	private:
-		int n_argc;
-		char **n_argv;
+		int init_argc;
+		char **init_argv;
 
 	protected:
 		void run();
