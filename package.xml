@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package>
+  <name>qthread_ros</name>
+  <version>0.1.0</version>
+  <description>
+    "Qthread ROS package for multiple node using single GUI"
+  </description>
+  <maintainer email="menggu1234@naver.com">mjlee111</maintainer>
+  <author>mjlee111</author>
+  <license>BSD</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <run_depend>roscpp</run_depend>
+</package>
