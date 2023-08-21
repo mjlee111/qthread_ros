@@ -1,63 +1,74 @@
-##############################################################################
-# CMake
-##############################################################################
 
-cmake_minimum_required(VERSION 3.5.0)
-project(qthread_ros)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
+cmake_minimum_required(VERSION 2.8.0)
+project(turtle_master)
 
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+find_package(catkin REQUIRED 
+    COMPONENTS 
+    qt_build 
+    roscpp 
+    cv_bridge
+    rospy
+    cv_bridge
+    image_transport
+    std_msgs
+    robit_msgs
+    roslib
+    )
 
-##############################################################################
-# Catkin
-##############################################################################
+set(OpenCV_INCLUDE_DIRS
+  /usr/local/include/opencv4
+  /usr/local/include/opencv4/opencv2
+  #/home/robit/opencv/opencv_contrib/modules/xfeatures2d/include
+  #/home/robit/opencv/opencv_contrib/modules/xfeatures2d/include/opencv2
+)
 
-# qt_build provides the qt cmake glue, roscpp the comms for a default talker
-find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  std_msgs
-  )
-include_directories(${catkin_INCLUDE_DIRS})
-# Use this to define what the package will export (e.g. libs, headers).
-# Since the default here is to produce only a binary, we don't worry about
-# exporting anything. 
-catkin_package()
+set(OpenCV_LIB_DIR
+  /usr/local/lib
+)
 
-##############################################################################
-# Qt Environment
-##############################################################################
+set(OpenCV_LIBS
+  opencv_core
+  opencv_highgui
+  opencv_imgcodecs
+  opencv_videoio
+  opencv_imgproc
+  opencv_features2d
+  opencv_flann
+  opencv_calib3d
+)
 
-# included via the dependency call in package.xml
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
+include_directories(${catkin_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS})
+link_directories(${OpenCV_LIB_DIR})
 
-##############################################################################
-# Sections
-##############################################################################
+
+catkin_package(
+    INCLUDE_DIRS include
+    LIBRARIES turtle_master
+    CATKIN_DEPENDS image_transport roscpp roslib rospy std_msgs robit_msgs
+    DEPENDS)
+
+
+rosbuild_prepare_qt4(QtCore QtGui) 
+
+
 
 file(GLOB QT_FORMS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ui/*.ui)
 file(GLOB QT_RESOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} resources/*.qrc)
-file(GLOB_RECURSE QT_MOC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} FOLLOW_SYMLINKS include/qthread_ros/*.hpp)
+file(GLOB_RECURSE QT_MOC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} FOLLOW_SYMLINKS include/turtle_master/*.hpp)
 
-QT5_ADD_RESOURCES(QT_RESOURCES_CPP ${QT_RESOURCES})
-QT5_WRAP_UI(QT_FORMS_HPP ${QT_FORMS})
-QT5_WRAP_CPP(QT_MOC_HPP ${QT_MOC})
+QT4_ADD_RESOURCES(QT_RESOURCES_CPP ${QT_RESOURCES})
+QT4_WRAP_UI(QT_FORMS_HPP ${QT_FORMS})
+QT4_WRAP_CPP(QT_MOC_HPP ${QT_MOC})
 
-##############################################################################
-# Sources
-##############################################################################
+
 
 file(GLOB_RECURSE QT_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} FOLLOW_SYMLINKS src/*.cpp)
 
-##############################################################################
-# Binaries
-##############################################################################
 
-add_executable(qthread_ros ${QT_SOURCES} ${QT_RESOURCES_CPP} ${QT_FORMS_HPP} ${QT_MOC_HPP})
-target_link_libraries(qthread_ros Qt5::Widgets Qt5::Gui ${QT_LIBRARIES} ${catkin_LIBRARIES})
-install(TARGETS qthread_ros RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
+add_executable(turtle_master ${QT_SOURCES} ${QT_RESOURCES_CPP} ${QT_FORMS_HPP} ${QT_MOC_HPP})
+add_dependencies(turtle_master ${robit_msgs_EXPORTED_TARGETS})
+target_link_libraries(turtle_master ${QT_LIBRARIES} ${catkin_LIBRARIES} ${OpenCV_LIBS})
+install(TARGETS turtle_master RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
