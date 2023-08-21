@@ -1,0 +1,36 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/m/catkin_ws/devel/include/**",
+        "/home/m/cartographer_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/m/catkin_ws/src/turtlebot3_autorace_2023/clear_costmap_recovery/include/**",
+        "/home/m/catkin_ws/src/turtlebot3_autorace_2023/dwa_local_planner/include/**",
+        "/home/m/catkin_ws/src/turtlebot3_autorace_2023/global_planner/include/**",
+        "/home/m/catkin_ws/src/joy_to_cmd_vel/include/**",
+        "/home/m/catkin_ws/src/turtlebot3_autorace_2023/move_base/include/**",
+        "/home/m/catkin_ws/src/qthread_ros/include/**",
+        "/home/m/catkin_ws/src/turtlebot3_autorace_2023/robit_master/include/**",
+        "/home/m/catkin_ws/src/turtlebot3_autorace_2023/robit_vision/include/**",
+        "/home/m/catkin_ws/src/turtlebot3_autorace_2023/set_imu/include/**",
+        "/home/m/catkin_ws/src/turtlebot3_autorace_2023/simple_move/include/**",
+        "/home/m/catkin_ws/src/turtlebot3_autorace_2023/turtle_go/include/**",
+        "/home/m/catkin_ws/src/turtle_master/include/**",
+        "/home/m/catkin_ws/src/turtlebot3_autorace_2023/turtlebot3_slam/include/**",
+        "/home/m/catkin_ws/src/turtlebot3_autorace_2023/vision_test/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

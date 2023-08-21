@@ -1,1 +1,0 @@
-# qthread_ros
