@@ -11,7 +11,7 @@
 
 #include <QtGui>
 #include <QApplication>
-#include "../include/turtle_master/main_window.hpp"
+#include "../include/qthread_ros/main_window.hpp"
 
 /*****************************************************************************
 ** Main
@@ -24,7 +24,7 @@ int main(int argc, char **argv)
     ** Qt
     **********************/
     QApplication app(argc, argv);
-    turtle_master::MainWindow w(argc, argv);
+    qthread_ros::MainWindow w(argc, argv);
     w.show();
     app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
     int result = app.exec();

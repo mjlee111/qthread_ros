@@ -1,4 +1,0 @@
-<launch>
-    <node name="turtle_master" pkg="turtle_master" type="turtle_master" output="screen" />
-</launch>
-  
